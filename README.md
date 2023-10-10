@@ -26,14 +26,18 @@ conda install -y -c conda-forge ndcctools
 To build from source and install in your home directory:
 
 ```
-./configure --prefix ${HOME}/cctools
+git clone git://github.com/cooperative-computing-lab/cctools.git cctools-src
+cd cctools-src
+unset PYTHONPATH
+conda env create -y -f environment.yml
+./configure --with-base-dir $CONDA_PREFIX --prefix $CONDA_PREFIX
 make
 make install
 ```
 
 Then run the executables out of your home directory like this:
 ```
-export PATH=$HOME/cctools/bin:$PATH
+export PATH=$HOME/cctools-src/bin:$PATH
 makeflow -v
 vine_status
 ```
